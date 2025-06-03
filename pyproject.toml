@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling", "ziggy-pydust==0.23.2"]
+requires = ["hatchling", "ziggy-pydust==0.25.1"] # 0.25.1 uses zig 0.14
 build-backend = "hatchling.build"
 
 [project]

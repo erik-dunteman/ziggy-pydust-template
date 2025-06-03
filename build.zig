@@ -2,7 +2,7 @@ const std = @import("std");
 const py = @import("./pydust.build.zig");
 
 pub fn build(b: *std.Build) void {
-    const target = b.standardTargetOptions(.{});
+    const target = b.standardTargetOptionsQueryOnly(.{});
     const optimize = b.standardOptimizeOption(.{});
 
     const test_step = b.step("test", "Run library tests");
@@ -13,7 +13,7 @@ pub fn build(b: *std.Build) void {
 
     _ = pydust.addPythonModule(.{
         .name = "fibonacci._lib",
-        .root_source_file = .{ .path = "src/fib.zig" },
+        .root_source_file = b.path("src/fib.zig"),
         .limited_api = true,
         .target = target,
         .optimize = optimize,
