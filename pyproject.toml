@@ -1,38 +1,19 @@
 [build-system]
-requires = ["poetry-core", "ziggy-pydust==0.23.2"]
-build-backend = "poetry.core.masonry.api"
+requires = ["hatchling", "ziggy-pydust==0.23.2"]
+build-backend = "hatchling.build"
 
-[tool.poetry]
-name = "ziggy-pydust-template"
+[project]
+name = "fibonacci"
 version = "0.1.0"
-description = ""
-authors = ["Fulcrum Inc. <hello@fulcrum.so>"]
-readme = "README.md"
-packages = [{ include = "fibonacci" }]
-include = [
-    { path = "src/", format = "sdist" },
-    { path = "fibonacci/*.so", format = "wheel" },
-    "fibonacci/*.pyi"
-]
 
-[tool.poetry.build]
-script = "build.py"
+[tool.hatch.build.targets.wheel]
+packages = ["fibonacci"]
+artifacts = ["fibonacci/*.so"]
 
-[tool.poetry.dependencies]
-python = "^3.11"
+[tool.hatch.build.targets.wheel.hooks.custom]
 
-[tool.poetry.group.dev.dependencies]
-ziggy-pydust = "0.23.2"
-pytest = "^8.0.0"
-ruff = "^0.4.0"
-black = "^23.7.0"
-
-[tool.black]
-line-length = 120
-
-[tool.ruff]
-line-length = 120
-select = ["F", "E", "W", "UP", "I001", "I002"]
+# [tool.pydust]
+# self_managed = true # Pydust will build pydust.build.zig for us, but we'll manage our own build.zig
 
 [[tool.pydust.ext_module]]
 name = "fibonacci._lib"

@@ -154,6 +154,7 @@ cython_debug/
 
 # Zig
 zig-cache/
+.zig-cache/
 zig-out/
 /release/
 /debug/
@@ -162,7 +163,6 @@ zig-out/
 /docgen_tmp/
 
 pydust.build.zig
-build.zig
 
 # IDE
 .idea/

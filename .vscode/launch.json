@@ -8,7 +8,7 @@
             "request": "launch",
             "name": "Debug",
             "initCommands": [
-                "shell poetry run pydust debug ${file}"
+                "shell uv run pydust debug ${file}"
             ],
             "program": "zig-out/bin/debug.bin",
         },
