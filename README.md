@@ -1,6 +1,18 @@
 # Pydust Template for UV and Hatchling
 
-This fork reworks the template to use [UV](https://github.com/uv-labs/uv), [Ruff](https://github.com/astral-sh/ruff), and [Hatchling](https://github.com/uv-labs/hatchling) instead of [Poetry](https://github.com/python-poetry/poetry) and [Black](https://github.com/psf/black).
+This fork reworks the template to use [UV](https://docs.astral.sh/uv/), [Ruff](https://github.com/astral-sh/ruff), and [Hatchling](https://github.com/pypa/hatch) instead of [Poetry](https://github.com/python-poetry/poetry) and [Black](https://github.com/psf/black).
+
+Changes were minimal, just small pyproject.toml and build.py (hatch_build.py) changes to use PEP 621 standard.
+
+We also reconfigure to a self-managed zig build. This means pytest no longer runs Zig tests automatically, you must manually run them.
+
+### Prerequisites
+- [pyenv](https://github.com/pyenv/pyenv)
+- [uv](https://docs.astral.sh/uv/)
+- [ruff](https://docs.astral.sh/ruff/)
+- [hatchling](https://github.com/pypa/hatch)
+- [zig](https://ziglang.org/)
+
 
 ### How to build
 
@@ -10,11 +22,12 @@ pyenv local 3.13.1 # set python version
 uv sync # install dependencies
 ```
 
-Initial build:
+Build and run tests:
 ```bash
 uv run pytest # run python tests
-uv run zig build test -Dpython-exe=$(uv python find) # run zig tests. Requires
+uv run zig build test -Dpython-exe=$(uv python find) # run zig tests.
 ```
+Note the `-Dpython-exe=$(uv python find)` flag is required to avoid a codepath in pydust that shells out to `poetry`.
 
 
 ### My environment
@@ -22,4 +35,4 @@ uv run zig build test -Dpython-exe=$(uv python find) # run zig tests. Requires
 - On a Mac with M1 (ARM) chip
 - Using `zig` `0.14.0`
 - Using `python` `3.13.1`
-  - IMPORTANT: python must be installed with `pyenv`, not `brew`. The python from `brew` comes in Framework format, which breaks pydust's build process.
+  - IMPORTANT: python must be installed with `pyenv`, not `brew`. The python from `brew` comes in Framework format, which breaks pydust's build process due to how the path is parsed.
