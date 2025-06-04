@@ -1,6 +1,8 @@
+import sys
+
 from hatchling.builders.hooks.plugin.interface import BuildHookInterface
 from pydust import buildzig
-import sys
+
 
 class CustomBuildHook(BuildHookInterface):
     def initialize(self, version, build_data):

@@ -162,7 +162,11 @@ zig-out/
 /build-*/
 /docgen_tmp/
 
-pydust.build.zig
-
 # IDE
 .idea/
+
+# Ruff
+.ruff_cache/
+
+# UV
+uv.lock

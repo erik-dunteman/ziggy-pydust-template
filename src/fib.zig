@@ -91,7 +91,7 @@ comptime {
 
 // The rest of this file is test code.
 
-// `poetry run pytest` will run zig tests along with python tests.
+// `uv run pytest` will run zig tests along with python tests.
 // `zig build test` still works (within `poetry shell`) and runs just zig tests.
 
 const testing = std.testing;
@@ -99,6 +99,8 @@ const testing = std.testing;
 test "fibonacci iterative" {
     py.initialize();
     defer py.finalize();
+
+    std.debug.print("{d}\n", .{nth_fibonacci_iterative(.{ .n = 9 })});
 
     try testing.expectEqual(@as(u64, 34), nth_fibonacci_iterative(.{ .n = 9 }));
 }

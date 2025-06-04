@@ -1,20 +1,43 @@
-[build-system]
-requires = ["hatchling", "ziggy-pydust==0.25.1"] # 0.25.1 uses zig 0.14
-build-backend = "hatchling.build"
-
 [project]
 name = "fibonacci"
 version = "0.1.0"
+requires-python = ">=3.13"
+
+# We use hatchling to build the wheel
+[build-system]
+requires = ["hatchling", "ziggy-pydust==0.25.1"] # 0.25.1 uses zig 0.14
+build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["fibonacci"]
 artifacts = ["fibonacci/*.so"]
 
+# We use a custom hook to build the wheel using pydust's build script
 [tool.hatch.build.targets.wheel.hooks.custom]
 
-# [tool.pydust]
-# self_managed = true # Pydust will build pydust.build.zig for us, but we'll manage our own build.zig
+# Configure pydust to use our own build.zig
+# It will still codegen pydust.build.zig
+[tool.pydust]
+self_managed = true
 
-[[tool.pydust.ext_module]]
-name = "fibonacci._lib"
-root = "src/fib.zig"
+# We use uv to manage our dev dependencies
+[tool.uv]
+dev-dependencies = [
+    "ziggy-pydust==0.25.1",
+    "pytest>=8.0.0",
+    "ruff",
+]
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+src = ["fibonacci"]
+lint.select = [
+    "E",  # pycodestyle
+    "F",  # pyflakes
+    "I",  # isort
+    "B",  # flake8-bugbear
+    "N",  # pep8-naming
+]
+lint.ignore = []
+lint.dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
