@@ -1,6 +1,6 @@
 # Pydust Template for UV and Hatchling
 
-This fork reworks the template to use [UV](https://docs.astral.sh/uv/), [Ruff](https://github.com/astral-sh/ruff), and [Hatchling](https://github.com/pypa/hatch) instead of [Poetry](https://github.com/python-poetry/poetry) and [Black](https://github.com/psf/black).
+This fork reworks the template to use [UV](https://docs.astral.sh/uv/), [Hatchling](https://github.com/pypa/hatch), and [Ruff](https://github.com/astral-sh/ruff), instead of [Poetry](https://github.com/python-poetry/poetry) and [Black](https://github.com/psf/black).
 
 Changes were minimal, just small pyproject.toml and build.py (hatch_build.py) changes to use PEP 621 standard.
 
