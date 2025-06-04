@@ -6,14 +6,6 @@ Changes were minimal, just small pyproject.toml and build.py (hatch_build.py) ch
 
 We also reconfigure to a self-managed zig build. This means pytest no longer runs Zig tests automatically, you must manually run them.
 
-### Prerequisites
-- [pyenv](https://github.com/pyenv/pyenv)
-- [uv](https://docs.astral.sh/uv/)
-- [ruff](https://docs.astral.sh/ruff/)
-- [hatchling](https://github.com/pypa/hatch)
-- [zig](https://ziglang.org/)
-
-
 ### How to build
 
 Environment:
@@ -25,7 +17,7 @@ uv sync # install dependencies
 Build and run tests:
 ```bash
 uv run pytest # run python tests
-uv run zig build test -Dpython-exe=$(uv python find) # run zig tests.
+uv run zig build test -Dpython-exe=$(uv python find) # run zig tests
 ```
 Note the `-Dpython-exe=$(uv python find)` flag is required to avoid a codepath in pydust that shells out to `poetry`.
 
